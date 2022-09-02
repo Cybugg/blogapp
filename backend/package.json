@@ -1,0 +1,1 @@
+{"name":"blog-backend","version":"1.0.0","description":"This the environment for my first blog backend","main":"server.js","scripts":{"test":"run test"},"keywords":["blogapp","mongodb","mongoose","nodejs","mern"],"author":"Cybug Technologies","license":"MIT","dependencies":{"bcryptjs":"^2.4.3","cors":"^2.8.5","dotenv":"^16.0.1","express":"^4.18.1","mongoose":"^6.5.2"}}
