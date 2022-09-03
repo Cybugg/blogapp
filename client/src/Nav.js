@@ -247,7 +247,6 @@ const toggleEntBlogList = () => {
          
           <li className='p-1 hover:bg-gray-100 py-2 relative pl-3'><Link to ="/">Politics</Link></li>
           </div>
-       
           </div>
           <li className='py-2 px-1 hover:bg-blue-100 hover:underline'><a href=""><InfoIcon /> Help</a></li>
           <li className='py-2 px-1 hover:bg-blue-100 hover:underline'><a href=""><CallIcon /> Contact us</a></li>

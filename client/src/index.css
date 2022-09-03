@@ -72,3 +72,33 @@ opacity: 1;
 .scroll-y{
   overflow-y: scroll;
 }
+
+.loginBg{
+  background: url("./images/loginJpg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.or {
+  text-align: center;
+  position: relative;
+}
+.or span {
+  display: inline-block;    
+}
+.or span:before,
+.or span:after {
+  border-top: 0.5px solid rgb(95, 95, 95);
+  display: block;
+  height: 0.5px;
+  content: " ";
+  width: 25%;
+  position: absolute;
+  left: 0;
+  top: 1em;
+}
+.or span:after {
+ right: 0;  
+ left: auto; 
+}
