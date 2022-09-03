@@ -43,7 +43,7 @@ function Login() {
             </div>
         </div>
         {/* lower section */}
-        <div className='flex items-center justify-between text-pink-600 mt-3 underline gap-5'>
+        <div className='flex items-center justify-between text-pink-600 mt-3 underline space-x-32'>
             <div className='hover:text-pink-700'>
                  <a href="">forgotten password?</a>
             </div>

@@ -91,12 +91,14 @@ const toggleEntBlogList = () => {
           
           <li className='p-1 hover:bg-gray-100'><Link to ="/">Fashion</Link></li>
           <li className='p-1 hover:bg-gray-100'><Link to ="/">Beauty</Link></li>
+          <li className='p-1 hover:bg-gray-100'><Link to ="/">Love</Link></li>
+          <li className='p-1 hover:bg-gray-100'><Link to ="/">Relationship</Link></li>
           <li className='p-1 hover:bg-gray-100'><Link to ="/">Lifestyle</Link></li>
          
           <li className='p-1 hover:bg-gray-100'><Link to ="/">Politics</Link></li>
           </div>
           </li>
-          <li className='hover:text-gray-500'><Link to ="/">Login</Link></li>
+          <li className='hover:text-gray-500'><Link to ="/login">Login</Link></li>
           <li className='hover:text-gray-500'><Link to ="/">Help</Link></li>
           <li className='hover:text-gray-500'><Link to ="/">Contact</Link></li>
           
@@ -205,7 +207,7 @@ const toggleEntBlogList = () => {
           {/* step three of the top section */}
           <ul className='flex items-center flex-col text-gray-600 mt-3 '>
             <li className='border border-blue-800 rounded p-1 text-blue-800 px-10 my-2 cur-pointer'><a href="">Create account</a></li>
-            <li className='my-2'><a href="">Log in</a></li>
+            <li className='my-2'><Link to="/login">Log in</Link></li>
           </ul>
             </div>
             {/* menu navigation links */}
