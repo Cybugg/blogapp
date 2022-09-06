@@ -15,7 +15,7 @@ function Signup() {
         WishHear
     </span>
     {/* login form */}
-        <form className='bg-white p-5 space-y-4 w-4/5 sm:w-3/5 text-lg shadow-lg py-12'>
+        <form className='bg-white p-5 space-y-4 w-4/5 sm:w-3/5 text-lg shadow-lg py-10 '>
          <input type="text" name="firstname" placeholder='First Name' required className='border-b-2 border-gray-500 outline-none px-1 w-full' /> <br />
          <input type="text" name="lastname" placeholder='Last Name' required className='border-b-2 border-gray-500 outline-none px-1 w-full' /> <br />
          <input type="email" name="email" placeholder='Email' required className='border-b-2 border-gray-500 outline-none px-1 w-full' /> <br />
@@ -24,6 +24,8 @@ function Signup() {
 
          {/* submit button */}
             <button type="submit" className='text-white bg-blue-500 p-1 text-md rounded hover:bg-blue-600 w-full'>Sign up</button>
+
+           
         </form>
 
 
@@ -42,12 +44,12 @@ function Signup() {
             </div>
         </div>
         {/* lower section */}
-        <div className='flex items-center justify-between text-pink-600 pt-4 underline space-x-32'>
+        <div className='flex items-center justify-between text-pink-600 pt-4 underline space-x-32 pb-5'>
   
-            <div className='hover:text-pink-700'>
-               <Link to="/login">Log in</Link> 
-            </div>
-        </div>
+  <div className='hover:text-pink-700'>
+     <Link to="/login">Log in</Link> 
+  </div>
+</div>
 
 
       </div>

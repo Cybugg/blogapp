@@ -25,13 +25,13 @@ function Login() {
 
     {/* login form */}
 
-        <form className='bg-white p-5 space-y-4 w-4/5 sm:w-3/5 text-lg shadow-lg py-12'>
+        <form className='bg-white p-5 space-y-4 w-4/5 sm:w-3/5 text-lg shadow-lg py-10'>
          <input type="email" name="email" placeholder='Email' required className='border-b-2 border-gray-500 outline-none px-1 w-full' /> <br />
          <input type="password" name="password" placeholder = "Password" required  className='border-b-2 border-gray-500 outline-none px-1 w-full'/> <br />
 
          {/* submit button */}
 
-            <button type="submit" className='text-white bg-blue-500 p-1 text-md rounded hover:bg-blue-600 w-full'>Log in</button>
+            <button type="submit" className='text-white bg-blue-500 p-1  text-md rounded hover:bg-blue-600 w-full'>Log in</button>
         
         {/* Checkbox (remember me) */}
 
@@ -57,7 +57,7 @@ function Login() {
 
         {/* lower section */}
 
-        <div className='flex items-center justify-between text-pink-600  underline space-x-32 pt-4'>
+        <div className='flex items-center justify-between text-pink-600  underline space-x-32 pt-4 pb-5'>
             <div className='hover:text-pink-700'>
                  <a href="">forgotten password?</a>
             </div>
