@@ -9,8 +9,12 @@ import UserBlogs from './components/userBlogs';
 import BlogDetails from './components/blogDetails';
 import AddBlog from './components/addBlog';
 import Signup from './pages/signup';
+import { useSelector } from 'react-redux';
 
 function App() {
+    const isLoggedIn = useSelector(st => st.isLoggedIn);
+console.log(isLoggedIn)
+
   return (
     <BrowserRouter>
      <div className="App crimson ">

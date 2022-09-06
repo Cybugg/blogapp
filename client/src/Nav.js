@@ -19,13 +19,17 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { useSelector } from 'react-redux';
 
 function Nav() {
   const [menu,setMenu] = useState(false)
   const [darkMode,setDarkMode] = useState(false)
   const [blogDropDown ,setBlogDropDown] = useState(false)
   const [entDropDown ,setEntDropDown] = useState(false)
-
+  
+  
+  // states from the store
+  const isLoggedIn = useSelector(st => st.isLoggedIn);
 
 const toggleMenu = (e)=>{
   e.stopPropagation()
@@ -100,8 +104,8 @@ const toggleEntBlogList = () => {
           <li className='p-1 hover:bg-gray-100'><Link to ="/">Politics</Link></li>
           </div>
           </li>
-          <li className='hover:text-gray-500'><Link to ="/login">Login</Link></li>
-          <li className='hover:text-gray-500'><Link to ="/">Help</Link></li>
+          {!isLoggedIn && <li className='hover:text-gray-500'><Link to ="/login">Login</Link></li>
+         } <li className='hover:text-gray-500'><Link to ="/">Help</Link></li>
           <li className='hover:text-gray-500'><Link to ="/">Contact</Link></li>
           
         {/* search bar */}
@@ -114,7 +118,8 @@ const toggleEntBlogList = () => {
         ><SearchIcon /> 
         </button>
       </form>
-      <li className='text-blue-600 text-sm border border-blue-600 rounded p-1'><Link to ="/">Create account</Link></li>
+      {!isLoggedIn && <li className='text-blue-600 text-sm border border-blue-600 rounded p-1'><Link to ="/">Create account</Link></li>}
+      {isLoggedIn && <li className='text-pink-600 text-sm border border-pink-600 rounded p-1'><Link to ="/">Log out</Link></li>}
 
         </ul>
 
@@ -208,8 +213,15 @@ const toggleEntBlogList = () => {
           </div>
           {/* step three of the top section */}
           <ul className='flex items-center flex-col text-gray-600 mt-3 '>
-            <li className='border border-blue-800 rounded p-1 text-blue-800 px-10 my-2 cur-pointer'><a href="">Create account</a></li>
-            <li className='my-2'><Link to="/login">Log in</Link></li>
+            {/* create account */}
+            {!isLoggedIn && <li className='border border-blue-800 rounded p-1 text-blue-800 px-10 my-2 cur-pointer'><a href="">Create account</a></li>}
+          {/* login */}
+           {!isLoggedIn && <li className='my-2'><Link to="/login">Log in</Link></li>}
+
+          {/* logout */}
+          {
+            isLoggedIn  && <li className='border border-pink-800 rounded p-1 text-pink-800 px-10 my-2 cur-pointer' ><Link to="/login">Log out</Link></li>
+          }
           </ul>
             </div>
             {/* menu navigation links */}
