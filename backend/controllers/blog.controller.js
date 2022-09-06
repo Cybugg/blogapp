@@ -3,17 +3,31 @@ const mongoose = require('mongoose')
 const Blog = require('../models/blog.models')
 const User = require("../models/user.models")
 
-const getAllBlogs =  (req,res) => {
-     Blog.find()
-    .then(blogs => res.status(200).json(blogs))
-    .catch(err => res.status(400).json("error"+err))
+
+
+// get all the blog in the database
+const getAllBlogs = async (req,res) => {
+
+    let allBlogs;
+
+
+    try{
+        allBlogs = await Blog.find();
+    }
+    catch(err){
+        console.log(err)
+        res.status(404).json({message:"Cant get blogs"})
+    }
+
+    res.status(200).json(allBlogs)
 }
 
+// add to the blogs in the database
 const addBlog =  async (req,res) => {
 
     let existingUser;
     
-    const {title,description,image,user} = req.body;
+    const {category,title,description,image,user} = req.body;
 
     try{
          existingUser = await User.findById(user)
@@ -26,11 +40,10 @@ const addBlog =  async (req,res) => {
    if(!existingUser)res.status(400).json({message:"Unable to find user"})
 
 
+// An instance of the blog 
     const newBlog =  new Blog(
-        {title,description,image,user}
+        {category,title,description,image,user}
     );
-    
-
     
    try{
     const session = await mongoose.startSession()
@@ -39,42 +52,58 @@ const addBlog =  async (req,res) => {
     existingUser.blogs.push(newBlog);
     existingUser.save(session);
     session.commitTransaction();
-    res.status(200).json("Blog saved Successfully!")
+   
         }
    
    catch(err){
     console.log(err)
-   res.status(500).json({message:err})
+   res.status(400).json({message:err})
    }
-    
+
+    res.status(200).json("Blog saved ok")
+   
 }
 
-const updateBlog =  (req,res) => {
-    const blogId = req.params.id;
+// update blog in the database
+
+const updateBlog = async (req,res) => {
+    const id = req.params.id;
     const {title,description} = req.body
     
-   const blog =  Blog.findByIdAndUpdate(blogId,{title,description})
-        .then(() => res.status(200).json("Blog Updated!"))
-        .catch(err => res.status(400).json(err))
+    let blog ;
 
-        if(!blog)res.status(500).json("Unable to update!")
+    try{
+        blog = await Blog.findByIdAndUpdate(id,{title,description})
+    }
+    catch(err){
+        console.log(err)
+    }
+
+    if(!blog)res.status(404).json("Cant find blog to update")
+
+    res.status(200).json({message:"Update ok"})
 
 }
-const getById =  (req,res) => {
-    const blogId = req.params.id
+
+// get a blog by its id
+
+const getById = async (req,res) => {
+    const id = req.params.id
     let blog;
-    Blog.findById(blogId)
-        .then(
-            singleblog => {
-                blog = singleblog;
-                res.status(200).json(blog)}
-        )
-        .catch(
-            err => res.status(400).json("Error: "+ err)
-        )
-    
-        if(!blog)res.status(500).json("No Blog Found!")
+
+    try{
+        blog = await Blog.findById(id)
     }
+    catch(err){
+    console.log(err)
+    }
+
+    if(!blog)res.status(404).json("Cant find blog!")
+
+    res.status(200).json(blog)
+    }
+
+    // delete blog from the database
 
     const deleteBlog = async (req,res) => {
         const blogId = req.params.id
@@ -83,15 +112,18 @@ const getById =  (req,res) => {
             deleteBlogInProcess = await Blog.findByIdAndRemove(blogId).populate('user');
             await deleteBlogInProcess.user.blogs.pull(deleteBlogInProcess);
             await deleteBlogInProcess.user.save()
-            res.status(200).json({message:"Successfully deleted"})
+            
         }
         catch(err){
             console.log(err)
-            res.status(400).json({message:err})
         }
-        if(!deleteBlogInProcess)res.status(500).json({message:"Unable to delete blog!"})
+        if(!deleteBlogInProcess)res.status(400).json({message:"Cant find blog to delete"})
+
+        res.status(200).json({message:"delete ok"})
 
     }
+    // get user with populated blog by id
+
     const getUserBlogById = async (req,res) => {
 
         const userBlogId = req.params.id
@@ -103,7 +135,9 @@ const getById =  (req,res) => {
         catch(err){
             console.log(err)
         }
-        if(!userBlogs)res.status(400).json("cant find user")
+        if(!userBlogs)res.status(404).json(userBlogs)
+
+
     }
 
 

@@ -12,52 +12,67 @@ const getAllUsers = async  (req,res) => {
 
 
 
-const signup = (req,res) => {
-    const  {name,email,password} = req.body
-    const existingUser = (user)=>{
-    if(user){res.status(400).json("User Already Exists! Log in instead")}
-}
-   User.findOne({email})
-    .then(User => existingUser(User) )
-    .catch(err => res.status(404).json(err))
+const signup = async (req,res) => {
+    const  {firstname,lastname,username,email,password} = req.body
 
+    // lets check if the email and the username is taken
+    let existingEmail;
+    let existingUsername;
+
+    try{
+       existingEmail = await User.findOne({email})
+       existingUsername = await User.findOne({username})
+   }
+   catch(err){
+    console.log(err)
+   }
+
+   if(existingEmail){
+    res.status(400).json({message:"Email Already Taken"})
+   }
+   else if(existingUsername){
+    res.status(400).json("Username Already Taken")
+   }
+   
+// lets encrypt the user password using bycryptjs 
     const hashedPassword = bycrypt.hashSync(password)
 
     const newUser = new User(
-        {name,email,password:hashedPassword,blogs:[]}
+        {firstname,lastname,username,email,password:hashedPassword,blogs:[]}
     ) 
 
-    newUser.save()
-    .then(
-        () => res.json("User Saved!")
-    )
-    .catch(
-        err => res.status(404).json(err + " email already probably used! Login instead if it is your email")
-    )
+    try{
+        await  newUser.save()
+
+    }
+    catch(err){
+        console.log(err)
+    }
+    res.json("User Saved!")
 }
 
 const login = async (req,res) => {
     const {email,password} = req.body;
     
     // check if user exists
-   let existingUser;
+   let existingUserWEmail;
 
    try{
-    existingUser = await User.findOne({email})
+    existingUserWEmail = await User.findOne({email})
    }
    catch(err){
   res.status(404).json("error:" + err)
    }
 
-if(!existingUser)res.status(404).json("User Not Found! Please Signup")
+if(!existingUserWEmail)res.status(404).json("User Not Found! Please Signup")
 
 // check password
 
-const isPasswordCorrect = bycrypt.compareSync(password,existingUser.password)
+const isPasswordCorrect = bycrypt.compareSync(password,existingUserWEmail.password)
 
 if(!isPasswordCorrect)res.status(400).json("Incorrect Password!")
 
-return res.status(200).json("Okay password")
+return res.status(200).json("Logged in successfully!")
 }
 
 

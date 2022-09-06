@@ -16,7 +16,7 @@ function Login() {
         WishHear
     </span>
     {/* login form */}
-        <form className='bg-white p-5 space-y-4 w-4/5 sm:w-3/5 text-lg'>
+        <form className='bg-white p-5 space-y-4 w-4/5 sm:w-3/5 text-lg shadow-lg'>
          <input type="email" name="email" placeholder='Email' required className='border-b-2 border-gray-500 outline-none px-1 w-full' /> <br />
          <input type="password" name="password" placeholder = "Password" required  className='border-b-2 border-gray-500 outline-none px-1 w-full'/> <br />
 

@@ -93,6 +93,8 @@ const toggleEntBlogList = () => {
           <li className='p-1 hover:bg-gray-100'><Link to ="/">Beauty</Link></li>
           <li className='p-1 hover:bg-gray-100'><Link to ="/">Love</Link></li>
           <li className='p-1 hover:bg-gray-100'><Link to ="/">Relationship</Link></li>
+          <li className='p-1 hover:bg-gray-100'><Link to ="/">Hacks</Link></li>
+          <li className='p-1 hover:bg-gray-100'><Link to ="/">Nature</Link></li>
           <li className='p-1 hover:bg-gray-100'><Link to ="/">Lifestyle</Link></li>
          
           <li className='p-1 hover:bg-gray-100'><Link to ="/">Politics</Link></li>
@@ -245,6 +247,7 @@ const toggleEntBlogList = () => {
           <li className='p-1 hover:bg-gray-100 py-2 relative pl-3'><Link to ="/">Love</Link></li>
           <li className='p-1 hover:bg-gray-100 py-2 relative pl-3'><Link to ="/">Relationship</Link></li>
           <li className='p-1 hover:bg-gray-100 py-2 relative pl-3'><Link to ="/">Hacks</Link></li>
+          <li className='p-1 hover:bg-gray-100 py-2 relative pl-3'><Link to ="/">Nature</Link></li>
           <li className='p-1 hover:bg-gray-100 py-2 relative pl-3'><Link to ="/">Lifestyle</Link></li>
          
           <li className='p-1 hover:bg-gray-100 py-2 relative pl-3'><Link to ="/">Politics</Link></li>
