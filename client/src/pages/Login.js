@@ -1,12 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../images/logo.png'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import GoogleIcon from '@mui/icons-material/Google'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 
 function Login() {
+
+    const [inputs,setInputs] = useState({
+      email:"",password:""
+    })
+  
+    // handleSubmit
+  const sendRequest = async () => {
+    const res = await axios.post('http://127.0.0.1:5500/api/user/login',{
+        email:inputs.email,
+        password:inputs.password
+      }).catch(
+        err => console.log(err)
+      );
+    // response data
+    const data = res.data  
+    return data;
+    }
+    const  handleChange = e => {
+
+      setInputs(prev => ({
+        ...prev,
+      [e.target.name] :e.target.value
+      }))
+    }
+    
+    const handleSubmit = (e) =>{
+      e.preventDefault()
+      sendRequest().then((data)=>console.log(data))
+    }
   return (
     <div className='flex min-h-screen crimson bg-slate-100'>
 
@@ -25,9 +55,22 @@ function Login() {
 
     {/* login form */}
 
-        <form className='bg-white p-5 space-y-4 w-4/5 sm:w-3/5 text-lg shadow-lg py-10'>
-         <input type="email" name="email" placeholder='Email' required className='border-b-2 border-gray-500 outline-none px-1 w-full' /> <br />
-         <input type="password" name="password" placeholder = "Password" required  className='border-b-2 border-gray-500 outline-none px-1 w-full'/> <br />
+        <form className='bg-white p-5 space-y-4 w-4/5 sm:w-3/5 text-lg shadow-lg py-10' onSubmit={handleSubmit}>
+
+           {/* infos */}
+
+      <div className='info text-pink-600'>
+        
+        <span className={`hidden`}>Invalid Credentials!</span>
+      </div>
+
+        {/* email field */}
+
+         <input type="email" name="email" placeholder='Email' value={inputs.email} required className='border-b-2 border-gray-500 outline-none px-1 w-full' onChange={handleChange} /> <br />
+
+         {/* password field */}
+
+         <input type="password" name="password" placeholder = "Password" value={inputs.password} required  className='border-b-2 border-gray-500 outline-none px-1 w-full' onChange={handleChange}/> <br />
 
          {/* submit button */}
 

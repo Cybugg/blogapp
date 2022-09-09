@@ -16,23 +16,20 @@ const signup = async (req,res) => {
     const  {firstname,lastname,username,email,password} = req.body
 
     // lets check if the email and the username is taken
-    let existingEmail;
-    let existingUsername;
+    let existingUserWEmail;
+    
 
     try{
-       existingEmail = await User.findOne({email})
-       existingUsername = await User.findOne({username})
+       existingUserWithEmail = await User.findOne({email})
    }
    catch(err){
     console.log(err)
    }
 
-   if(existingEmail){
+   if(existingUserWEmail){
     res.status(400).json({message:"Email Already Taken"})
    }
-   else if(existingUsername){
-    res.status(400).json("Username Already Taken")
-   }
+   
    
 // lets encrypt the user password using bycryptjs 
     const hashedPassword = bycrypt.hashSync(password)
