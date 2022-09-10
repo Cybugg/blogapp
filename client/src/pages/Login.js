@@ -3,8 +3,10 @@ import logo from '../images/logo.png'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import GoogleIcon from '@mui/icons-material/Google'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { authActions } from '../store'
 
 
 function Login() {
@@ -12,7 +14,8 @@ function Login() {
     const [inputs,setInputs] = useState({
       email:"",password:""
     })
-  
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     // handleSubmit
   const sendRequest = async () => {
     const res = await axios.post('http://127.0.0.1:5500/api/user/login',{
@@ -35,7 +38,7 @@ function Login() {
     
     const handleSubmit = (e) =>{
       e.preventDefault()
-      sendRequest().then((data)=>console.log(data))
+      sendRequest().then(()=>dispatch(authActions.login())).then(() => navigate("/blogs")).then((data)=>console.log(data))
     }
   return (
     <div className='flex min-h-screen crimson bg-slate-100'>

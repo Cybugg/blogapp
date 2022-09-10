@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import GoogleIcon from '@mui/icons-material/Google'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function Signup() {
@@ -12,7 +12,10 @@ function Signup() {
   })
   const [matched,setMatched] = useState(true)
 
-const username = inputs.firstname + " " +inputs.lastname
+  const naviagte = useNavigate()
+
+  // username
+  const username = inputs.firstname + " " +inputs.lastname
 
 
   // handleSubmit
@@ -53,7 +56,7 @@ const username = inputs.firstname + " " +inputs.lastname
   // handlesubmit
   const handleSubmit = (e) =>{
     e.preventDefault()
-    sendRequest().then((data)=>console.log(data))
+    sendRequest().then(()=>naviagte("/login")).then((data)=>console.log(data))
   }
   return (
     <div className='flex min-h-screen crimson bg-slate-100'>

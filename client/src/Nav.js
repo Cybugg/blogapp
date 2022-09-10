@@ -19,14 +19,15 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from './store';
 
 function Nav() {
   const [menu,setMenu] = useState(false)
   const [darkMode,setDarkMode] = useState(false)
   const [blogDropDown ,setBlogDropDown] = useState(false)
   const [entDropDown ,setEntDropDown] = useState(false)
-  
+  const dispatch = useDispatch()
   
   // states from the store
   const isLoggedIn = useSelector(st => st.isLoggedIn);
@@ -118,8 +119,9 @@ const toggleEntBlogList = () => {
         ><SearchIcon /> 
         </button>
       </form>
-      {!isLoggedIn && <li className='text-blue-600 text-sm border border-blue-600 rounded p-1'><Link to ="/">Create account</Link></li>}
-      {isLoggedIn && <li className='text-pink-600 text-sm border border-pink-600 rounded p-1'><Link to ="/">Log out</Link></li>}
+      {/* create account */}
+      {!isLoggedIn && <li className='text-blue-600 text-sm border border-blue-600 rounded p-1'><Link to ="/signup ">Create account</Link></li>}
+      {isLoggedIn && <li className='text-pink-600 text-sm border border-pink-600 rounded p-1'><Link to ="/login" onClick={()=>dispatch(authActions.logout())}>Log out</Link></li>}
 
         </ul>
 

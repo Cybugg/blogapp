@@ -10,6 +10,7 @@ import BlogDetails from './components/blogDetails';
 import AddBlog from './components/addBlog';
 import Signup from './pages/signup';
 import { useSelector } from 'react-redux';
+import AllBlogs from './pages/allBlogs';
 
 function App() {
     const isLoggedIn = useSelector(st => st.isLoggedIn);
@@ -23,7 +24,7 @@ console.log(isLoggedIn)
       <Route index element={<Home />}/>
       <Route path='/login' element={<Login />}/>
       <Route path='/signup' element={<Signup />}/>
-      <Route path='/blogs' element={<Blogs />}/>
+      <Route path='/blogs' element={<AllBlogs />}/>
       <Route path='/myBlogs' element={<UserBlogs />}/>
       <Route path='/myBlogs/:id' element={<BlogDetails />}/>
       <Route path='/blogs/add' element={<AddBlog />}/>
